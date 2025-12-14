@@ -2,6 +2,7 @@
 import { prisma } from "../../../lib/prisma";
 import Link from "next/link"
 import Header from "../actions/header";
+import { Reservation } from "../../../generated/prisma/browser";
 export default async function AdminPage() {
   const reservations = await prisma.reservation.findMany({
     orderBy: { plage: "asc" }
@@ -31,7 +32,7 @@ export default async function AdminPage() {
           <h2 className="text-2xl font-bold mb-6">Liste des rendez-vous</h2>
 
           <div className="space-y-4">
-  {reservations.map((a) => (
+  {reservations.map((a : Reservation) => (
     <Link
       key={a.id}
       href={`/admin/${a.id}`} // dynamic route
